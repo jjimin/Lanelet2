@@ -24,6 +24,8 @@ def tutorial():
 
 def part1primitives():
     # Primitives work very similar to c++, except that the data can be accessed as properties instead of functions
+    ### when enter 'getId()', new Id is asserted (1000 ~).
+    ### At first, there is no attribute in a primitive. And we can assert new attributes with 'p.attributes["key"] = "value"'.
     p = Point3d(getId(), 0, 0, 0)
     assert p.x == 0
     p.id = getId()
@@ -32,11 +34,14 @@ def part1primitives():
     assert p.attributes["key"] == "value"
 
     # the 2d/3d mechanics work too
+    ### And, when you do like below, p2d and p have the same 'id'.
     p2d = lanelet2.geometry.to2D(p)
 
     # all (common) geometry calculations are available as well:
     p2 = Point3d(getId(), 1, 0, 0)
     assert lanelet2.geometry.distance(p, p2) == 1
+    ### If you enter like 'lanelet2.geometry.distance(p2d, Point3d(getId(), 1, 0, 1))', there will be an error.
+    ### Because it can't calculate a distance of two points that have different dimensions.
     assert lanelet2.geometry.distance(p2d, Point2d(getId(), 1, 0, 1)) == 1
 
     # linestrings work conceptually similar to a list (but they only accept points, of course)
